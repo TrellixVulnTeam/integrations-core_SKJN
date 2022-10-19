@@ -499,6 +499,7 @@ def construct_pytest_options(
     pytest_args='',
     e2e=False,
     ddtrace=False,
+    memray=False,
 ):
     # Prevent no verbosity
     pytest_options = f'--verbosity={verbose or 1}'
@@ -551,6 +552,9 @@ def construct_pytest_options(
             # This will be formatted to the appropriate coverage paths for each package
             ' {}'
         )
+
+    if memray:
+        pytest_options += f' --memray'
 
     if marker:
         pytest_options += f' -m "{marker}"'
